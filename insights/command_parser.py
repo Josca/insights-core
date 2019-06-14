@@ -13,11 +13,11 @@ import sys
 
 USAGE = """insights <command> [<args>]
 Available commands:
-    cat         Execute a spec and show the output
-    collect     Collect all specs against the client and create an Insights archive.
-    inspect     Execute component and shell out to ipython for evaluation.
-    info        View info and docs for Insights Core components.
-    run         Run insights-core against host or an archive.
+  cat         Execute a spec and show the output
+  collect     Collect all specs against the client and create an Insights archive.
+  inspect     Execute component and shell out to ipython for evaluation.
+  info        View info and docs for Insights Core components.
+  run         Run insights-core against host or an archive.
 """
 
 
@@ -68,7 +68,21 @@ class InsightsCli(object):
         run(print_summary=True)
 
 
+def fix_arg_dashes():
+
+    en_dash = '\u2013'
+    em_dash = '\u2014'
+
+    i = 1
+    # replace unicode dashes from argument definitions that may have been copy and pasted from documentation
+    for a in sys.argv[1:]:
+        a = a.replace(em_dash, '--').replace(en_dash, '-')
+        sys.argv[i] = a
+        i += 1
+
+
 def main():
+    fix_arg_dashes()
     InsightsCli()
 
 
