@@ -40,8 +40,8 @@ class NormalMD5(CommandParser):
 
     def parse_content(self, content):
         if len(content) != 1:
-            raise ParseException("Incorrect length for input {}.".format(len(content)))
+            raise ParseException("Incorrect length for input {length}.".format(length=len(content)))
         for line in content:
             self.md5sum, self.filename = content[-1].strip().split(None, 1)
             if len(self.md5sum) != 32:
-                raise ParseException("Invalid MD5sum value {}.".format(self.md5sum))
+                raise ParseException("Invalid MD5sum value {length}.".format(length=self.md5sum))
